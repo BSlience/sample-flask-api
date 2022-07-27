@@ -6,27 +6,13 @@ phases:
       - echo Logging in to Amazon ECR...
       - python3 -m pip install --upgrade pip
       - python3 -m pip install --no-cache-dir -r requirements.txt
-      # - aws --version
-      # - $(aws ecr get-login --region $AWS_DEFAULT_REGION --no-include-email)
-      # - REPOSITORY_URI=236180112394.dkr.ecr.us-east-1.amazonaws.com/flask_app
-      # - COMMIT_HASH=$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7)
-      # - IMAGE_TAG=${COMMIT_HASH:=latest}
   build:
     commands:
       - echo Build started on `date`
-      # - echo Building the Docker image...
-      # - docker build -t $REPOSITORY_URI:latest .
-      # - docker tag $REPOSITORY_URI:latest $REPOSITORY_URI:$IMAGE_TAG
   post_build:
     commands:
       - echo Build completed on `date`
       - echo start server on `date`
       - export FLASK_ENV=development 
       - export FLASK_RUN_HOST=0.0.0.0
-      - flask run --port=80
-      # - docker push $REPOSITORY_URI:latest
-      # - docker push $REPOSITORY_URI:$IMAGE_TAG
-      # - echo Writing container image definitions file...
-      # - printf '[{"name":"flask-app","imageUri":"%s"}]' $REPOSITORY_URI:$IMAGE_TAG > imagedefinitions.json
-artifacts:
-    files: imagedefinitions.json
+      - flask run --port=8000
