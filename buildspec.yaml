@@ -23,7 +23,7 @@ phases:
       - echo start server on `date`
       - export FLASK_ENV=development 
       - export FLASK_RUN_HOST=0.0.0.0
-      - flask run 
+      - flask run --port=80
       # - docker push $REPOSITORY_URI:latest
       # - docker push $REPOSITORY_URI:$IMAGE_TAG
       # - echo Writing container image definitions file...
